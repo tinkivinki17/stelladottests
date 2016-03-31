@@ -10,6 +10,7 @@ require_once(getcwd().'/main.php');
  * 			functionControllerResult() - will check reply from API for controller/function call.
  */
 Class Customer extends Main {
+	
 	/**
      * Config for customer/create.
      */
@@ -96,6 +97,17 @@ Class Customer extends Main {
      * @return boolean
      */
 	public function updatePasswordCustomerResult() {
-		return FALSE;
+		$result = json_decode($this->_result, TRUE);
+		if(is_array($result)) {
+			if( $result['data']['email'] === $this->_postFields['customer']['customer_id']
+				&& $result['data']['password_hash'] === md5($this->_postFields['customer']['customer_id'])) 
+			{
+				$state = TRUE;
+			}
+		} else {
+			$state = FALSE;
+		}
+
+		return $state;
 	}
 }

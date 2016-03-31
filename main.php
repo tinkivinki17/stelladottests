@@ -3,6 +3,7 @@
 	 * Main class. Nothing special.
 	 */
 	Class Main {
+
 		/**
 	     * Controller and Function that we testing.
 	     *
@@ -20,7 +21,7 @@
 		protected $_url;
 
 		/**
-	     * Url that we using
+	     * Url that we using.
 	     *
 	     * @var array
 	     */
@@ -60,7 +61,7 @@
 		/* 
 		 * Url segments, by default it is:
 		 * http://shop.stelladotdevlocal.co.uk/style/b2c_en_gb/apiv1/...
-		 *
+		 * 
 		 * @var string
 		 */
 		protected $_baseUrlSegment 	  = 'http://shop.stelladotdevlocal.co.uk';
@@ -102,7 +103,9 @@
 			return ($check == 1) ? 'Passed' : $this->_result;
 		}
 
-		// Generates using $_url from parts.
+		/**
+	     * Generates $_url using url parts.
+	     */
 		protected function _getUrl() {
 			$this->_url   =	implode('/', array(
 				$this->_baseUrlSegment,
@@ -120,7 +123,9 @@
 			empty($this->_getFields) ?: $this->_url .= '?' . http_build_query($this->_getFields);
 		}
 
-		// Sends http request to the API.
+		/**
+	     * Sends http request to the API.
+	     */
 		protected function _execute(){
 			$this->_getUrl();
 
@@ -128,7 +133,7 @@
 			ob_start();
 			if(!empty($this->_postFields)) {
 				curl_setopt($c, CURLOPT_POST, 1);
-				curl_setopt($c, CURLOPT_POSTFIELDS, http_build_query($this->_postFields));
+				curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($this->_postFields));
 			}
 
 			curl_exec($c);

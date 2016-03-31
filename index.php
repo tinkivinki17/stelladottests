@@ -4,7 +4,6 @@
 
 	/**
      * Array of tests with it's functionality.
-     * Has a structure like:
      *
      * @var array
      */
@@ -74,7 +73,7 @@
 				echo "<hr/>";
 
 				foreach($output as $state => $count)
-					echo "<div><b>{$state}:</b> {$count}</div>";
+					echo "<b>{$state}:</b> {$count} ";
 
 				echo "<hr/>";
 				
